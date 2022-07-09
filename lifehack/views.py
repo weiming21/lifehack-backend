@@ -1,9 +1,13 @@
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from .models import User
 from .serializers import UserSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+
+
+def home_view(*args, **kwargs):
+    return HttpResponse("<h1>Hello World</h1>")
 
 
 @api_view(['GET', 'POST'])
