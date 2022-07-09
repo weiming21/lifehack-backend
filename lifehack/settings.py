@@ -14,6 +14,14 @@ from pathlib import Path
 import django_heroku
 import os
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+import environ
+env = environ.Env()
+environ.Env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -131,3 +139,9 @@ django_heroku.settings(locals())
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+cloudinary.config(
+    cloud_name=env("CLOUD_NAME"),
+    api_key=env("API_KEY"),
+    api_secret=env("API_SECRET")
+)
