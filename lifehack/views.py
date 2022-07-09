@@ -10,10 +10,9 @@ def home_view(*args, **kwargs):
     return HttpResponse("<h1>Hello World</h1>")
 
 
-@api_view(['GET', 'POST'])
+@api_view(["POST"])
 def user_info(request):
-
-    if request.method == 'GET':
+    if request.method == "POST":
         try:
             user = User.objects.get(pk=request.data["name"])
         except User.DoesNotExist:
@@ -21,7 +20,10 @@ def user_info(request):
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
-    if request.method == 'POST':
+
+@api_view(["POST"])
+def new_user(request):
+    if request.method == "POST":
         try:
             user = User.objects.get(pk=request.data["name"])
         except User.DoesNotExist:

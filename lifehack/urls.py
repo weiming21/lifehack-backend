@@ -20,5 +20,6 @@ from lifehack import views
 urlpatterns = [
     path('', views.home_view, name="home"),
     path('admin/', admin.site.urls),
-    path('user/', views.user_info)
+    path('user/', views.user_info),
+    path('new/', views.new_user)
 ]
