@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'lifehack',
+    # 'Bins',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

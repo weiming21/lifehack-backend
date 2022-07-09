@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', views.user_info),
     path('new/', views.new_user),
-    path('upload/', views.classify_image)
+    path('upload/', views.classify_image),
+    path('bin/', views.bin_info),
 ]
