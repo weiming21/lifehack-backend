@@ -10,7 +10,7 @@ def home_view(*args, **kwargs):
     return HttpResponse("<h1>Hello World</h1>")
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'PUT'])
 def user_info(request):
 
     if request.method == 'GET':
@@ -21,7 +21,7 @@ def user_info(request):
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
-    if request.method == 'POST':
+    elif request.method == 'POST':
         try:
             user = User.objects.get(pk=request.data["name"])
         except User.DoesNotExist:
@@ -32,3 +32,15 @@ def user_info(request):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    elif request.method == 'PUT':
+        try:
+            user = User.objects.get(pk=request.data["name"])
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = UserSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors,status =status.HTTP_404_BAD_REQUEST)
+    
